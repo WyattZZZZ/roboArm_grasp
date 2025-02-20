@@ -29,20 +29,26 @@ class LLM:
 
 class Agent:
     def __init__(self, model_name):
-        self.format = LLM(model_name=model_name, prompt=prompt.prompt_factor)
+        self.format = LLM(model_name=model_name, prompt=prompt.prompt_format)
         self.model1 = LLM(model_name=model_name, prompt=prompt.prompt_factor)
         self.model2 = LLM(model_name=model_name, prompt=prompt.prompt_estimation)
         self.model3 = LLM(model_name=model_name, prompt=prompt.prompt_density)
 
     def __call__(self, message, *args, **kwargs):
-        message = json.loads(self.format(message))
+        message = self.format(message)
+        message = json.loads(message)
         object = message["object"]
-        response1 = self.model1(message=str(message))
-        response2 = self.model2(message=object)
-        response3 = self.model3(message=object)
+        response1 = json.loads(self.model1(message=str(message)))
+        response2 = json.loads(self.model2(message=object))
+        response3 = json.loads(self.model3(message=object))
 
         return {
-            "factor": response1,
-            "volume": response2,
-            "density": response3,
+            "factor": response1["factor"],
+            "volume": response2["volume"],
+            "density": response3["density"],
         }
+
+
+if __name__ == "__main__":
+    agent = Agent("deepseek-r1")
+    print(agent("Apple|Rubber"))

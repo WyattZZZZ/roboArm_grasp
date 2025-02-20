@@ -11,7 +11,6 @@ def chatbot(message, model_choice):
 # 假设有一个简单的 agent 函数
 def agent_function(message, model_choice):
     agent = LLM.Agent(model_name=model_choice)
-    message = json.loads(message)
     return json.dumps(agent(message))
 
 # 创建左侧chatbot和右侧agent部分的接口
@@ -33,4 +32,4 @@ with gr.Blocks() as demo:
             message_input_agent.submit(agent_function, [message_input_agent, model_choice_agent], response_output_agent)
 
 # 启动Gradio界面
-demo.launch(share=True)
+demo.launch()
