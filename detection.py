@@ -1,5 +1,3 @@
-from ultralytics import YOLO
-import cv2 as cv
 import pyrealsense2 as rs
 import numpy as np
 import cv2
@@ -10,22 +8,6 @@ def depth2pointcloud(depth):
 
 def calibrate(self, image_data, BB_data):
     pass
-
-def if_masked(self, response, pixel):
-    pass
-
-def make_mask(self, response, depth):
-    new = []
-    for row in depth:
-        c = sum(row)
-        new.append(c)
-    average = sum(new) / (len(depth)*len(depth[0]))
-    for i in range(len(depth)):
-        for j in range(len(depth[0])):
-            if if_masked(response, depth[i][j]):
-                depth[i][j] = average
-
-    return depth
 
 
 class Detection:

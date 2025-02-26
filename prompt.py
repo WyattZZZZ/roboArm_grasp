@@ -9,7 +9,7 @@ You can only output using plain text (NO MARKDOWN), which will be like
 
 {"factor": your value of coefficient of friction}
 
-Do not use any extra characters.
+Do not use any extra characters. Do not think too much.
 """
 
 prompt_estimation = """
@@ -23,7 +23,7 @@ You can only output using plain text (NO MARKDOWN), which will be like
 
 {"volume": your value}
 
-Do not use any extra characters.
+Do not use any extra characters. Do not think too much.
 """
 
 prompt_format = """
@@ -39,7 +39,7 @@ You can only output using plain text (NO MARKDOWN), which will be like
  "gripper": "your gripper material"
 }
 
-Do not use any extra characters.
+Do not use any extra characters. Do not think too much.
 """
 
 prompt_density = """
@@ -57,7 +57,7 @@ You can only output using plain text (NO MARKDOWN), which will be like
  "density": your value
 }
 
-Do not use any extra characters.
+Do not use any extra characters. Do not think too much.
 """
 
 prompt = """
