@@ -101,22 +101,22 @@ class Detection:
         Returns:
             float: Volume of object in cubic meters
         """
-    # Apply mask if provided
-    if mask_file:
-        mask, _ = Detection.read_mask(mask_file)
-        if mask.shape != depth_image.shape:
-            mask = cv2.resize(mask, (depth_image.shape[1], depth_image.shape[0]))
+        # Apply mask if provided
+        if mask_file:
+            mask, _ = Detection.read_mask(mask_file)
+            if mask.shape != depth_image.shape:
+                mask = cv2.resize(mask, (depth_image.shape[1], depth_image.shape[0]))
             
         # Create masked depth image by iterating through mask
-        avg_depth = np.mean(depth_image)
-        masked_depth = depth_image.copy()
-        height, width = mask.shape
-        for i in range(height):
-            for j in range(width):
-                if mask[i, j] == 0:  # If pixel is masked
-                    masked_depth[i, j] = 0
-        else:
-            masked_depth = depth_image
+            avg_depth = np.mean(depth_image)
+            masked_depth = depth_image.copy()
+            height, width = mask.shape
+            for i in range(height):
+                for j in range(width):
+                    if mask[i, j] == 0:  # If pixel is masked
+                        masked_depth[i, j] = avg_depth
+            else:
+                masked_depth = depth_image
             
     # Convert to point cloud
     point_cloud = depth2pointcloud(masked_depth, intrinsics, depth_scale)
@@ -124,7 +124,9 @@ class Detection:
     # Get 3D bounding box
     bbox_3d = Detection.predict_bounding_box(point_cloud)
 
-    return Detection.calculate_volume(bbox_3d)
+    volume = Detection.calculate_volume(bbox_3d)
+    
+    return volume
         
 
 class RealSenseRGBD:
