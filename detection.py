@@ -118,15 +118,15 @@ class Detection:
             else:
                 masked_depth = depth_image
             
-    # Convert to point cloud
-    point_cloud = depth2pointcloud(masked_depth, intrinsics, depth_scale)
+        # Convert to point cloud
+        point_cloud = depth2pointcloud(masked_depth, intrinsics, depth_scale)
         
-    # Get 3D bounding box
-    bbox_3d = Detection.predict_bounding_box(point_cloud)
+        # Get 3D bounding box
+        bbox_3d = Detection.predict_bounding_box(point_cloud)
 
-    volume = Detection.calculate_volume(bbox_3d)
+        volume = Detection.calculate_volume(bbox_3d)
     
-    return volume
+        return volume
         
 
 class RealSenseRGBD:

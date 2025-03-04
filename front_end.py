@@ -3,12 +3,10 @@ import gradio as gr
 import LLM
 
 
-# 假设我们有一个简单的chatbot模型函数
 def chatbot(message, model_choice):
     model = LLM.LLM(model_name=model_choice)
     return model(message)
 
-# 假设有一个简单的 agent 函数
 def agent_function(message, model_choice):
     agent = LLM.Agent(model_name=model_choice)
     return json.dumps(agent(message))
